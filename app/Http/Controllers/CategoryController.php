@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\GenaralApiTrait;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -9,57 +10,25 @@ class CategoryController extends Controller
 {
 
 
+        use GenaralApiTrait;
 
     public function index()
     {
         $categories = Category::select('id', app()->getLocale() . '_name as name' )->get();
 
-        return response()->json($categories);
+        return $this->returnData('categories', $categories, '');
     }
 
 
-
-    public function create()
+    public function getCategoryById(Request $request)
     {
-        //
+        $category = Category::select('id', app()->getLocale() . '_name as name')->find($request->id);
+
+         if(!$category)
+         {
+            return $this->returnError('001' ,'هذا المنتج غير موجود');
+         }
+         return $this->returnData('category',$category,'');
     }
 
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-
-
-
-    public function show($id)
-    {
-        //
-    }
-
-
-
-
-    public function edit($id)
-    {
-        //
-    }
-
-
-
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-
-
-
-
-    public function destroy($id)
-    {
-        //
-    }
 }
