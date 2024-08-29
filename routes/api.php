@@ -22,7 +22,9 @@ use Illuminate\Support\Facades\Route;
 
 
    Route::group(['middleware'=> ['api', 'checkpassword', 'checklanguage']], function(){
-    
+
         Route::post('get_main_categories', 'CategoryController@index');
+
+        Route::post('get_category_by_id', 'CategoryController@getCategoryById');
    });
 
