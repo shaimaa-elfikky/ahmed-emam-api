@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+  //all routes must be authenticated
+
+
+   Route::group(['middleware'=> ['api', 'checkpassword', 'checklanguage']], function(){
+    
+        Route::post('get_main_categories', 'CategoryController@index');
+   });
+
