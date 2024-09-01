@@ -21,10 +21,22 @@ use Illuminate\Support\Facades\Route;
   //all routes must be authenticated
 
 
-   Route::group(['middleware'=> ['api', 'checkpassword', 'checklanguage']], function(){
+    Route::group(['middleware'=> ['api', 'checkpassword', 'checklanguage']], function(){
 
-        Route::post('get_main_categories', 'CategoryController@index');
+            Route::post('get_main_categories', 'CategoryController@index');
 
-        Route::post('get_category_by_id', 'CategoryController@getCategoryById');
-   });
+            Route::post('get_category_by_id', 'CategoryController@getCategoryById');
 
+        Route::group(['prifix' => ['admin'] ,'namespace'=>'admin'],function(){
+
+            Route::post('login', 'AuthController@login');
+
+        });
+    });
+
+    Route::group(
+        ['middleware' => ['api', 'checkpassword', 'checklanguage', 'checkAdminToken:admin-api']],
+        function () {
+        Route::post('offers', 'CategoryController@getCategoryById');
+        }
+    );
