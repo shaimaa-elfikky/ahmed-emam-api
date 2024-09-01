@@ -24,11 +24,11 @@ class CategoryController extends Controller
     {
         $category = Category::select('id', app()->getLocale() . '_name as name')->find($request->id);
 
-         if(!$category)
-         {
+        if(!$category)
+        {
             return $this->returnError('001' ,'هذا المنتج غير موجود');
-         }
-         return $this->returnData('category',$category,'');
+        }
+            return $this->returnData('category',$category,'');
     }
 
 }

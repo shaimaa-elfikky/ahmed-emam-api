@@ -9,12 +9,12 @@ trait GenaralApiTrait
 {
 
 
-    public function returnError($errNum , $msg)
+    public function returnError($errNum, $msg)
     {
 
         return response()->json([
             'status'=> false ,
-            'errNum'=> $errNum ,
+            'errNum'=> $errNum,
             'msg' => $msg
 
         ]);
@@ -41,7 +41,7 @@ trait GenaralApiTrait
             'status' => true,
             'errNum' =>"5000",
             'msg' => $msg,
-             $key => $value
+            $key => $value
 
         ]);
     }
