@@ -9,7 +9,7 @@ class Admin extends Model implements JWTSubject
 {
     protected $table='admins';
 
-    protected $fillable = ['name','email','created_at','updated_at'];
+    protected $fillable = [ 'email', 'name', 'password'];
 
     public function getJWTIdentifier()
     {
