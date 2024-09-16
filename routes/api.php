@@ -27,11 +27,15 @@ use Illuminate\Support\Facades\Route;
 
             Route::post('get_category_by_id', 'CategoryController@getCategoryById');
 
-        Route::group(['prifix' => ['admin'] ,'namespace'=>'admin'],function(){
+            Route::group(['prefix' => 'admin' ,'namespace'=> 'Admin'],function(){
 
             Route::post('login', 'AuthController@login');
 
+            Route::post('logout', 'AuthController@logout')->middleware('admin.guard:admin-api');
+
         });
+
+
     });
 
     Route::group(
