@@ -35,6 +35,13 @@ use Illuminate\Support\Facades\Route;
 
         });
 
+        Route::group(['prefix'=>'user' , 'middleware'=> 'admin.guard:user-api'] ,function()
+        {
+            Route::post('profile' ,function(){
+                return 'Only Authenticated User Can Reach Me!';
+            });
+        });
+
 
     });
 

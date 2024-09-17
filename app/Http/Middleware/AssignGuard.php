@@ -15,7 +15,7 @@ class AssignGuard
     public function handle($request, Closure $next, $guard = null)
     {
         if ($guard != null) {
-            auth()->shouldUse($guard); //shoud you user guard / table
+            auth()->shouldUse($guard); //shoud you use guard / table
             $token = $request->header('auth-token');
             $request->headers->set('auth-token', (string) $token, true);
             $request->headers->set('Authorization', 'Bearer ' . $token, true);
