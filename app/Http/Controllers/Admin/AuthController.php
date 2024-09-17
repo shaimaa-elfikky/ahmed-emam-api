@@ -52,7 +52,7 @@ class AuthController extends Controller
 
 
         }catch(\Exception $e){
-           return $this->returnError($e->getCode() , $e->getMessage());
+            return $this->returnError($e->getCode() , $e->getMessage());
         }
     }
 
@@ -61,7 +61,7 @@ class AuthController extends Controller
     {
         //dd($request);
         $token = $request ->header('auth-token');
-        dd($token);
+        // dd($token);
         if ($token) {
             try {
 
