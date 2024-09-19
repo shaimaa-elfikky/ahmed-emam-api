@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,16 +31,21 @@ use Illuminate\Support\Facades\Route;
 
             Route::post('login', 'AuthController@login');
 
-            Route::post('logout', 'AuthController@logout')->middleware('admin.guard:admin-api');
+            Route::post('logout', 'AuthController@logout')->middleware('auth.guard:admin-api');
 
-        });
-
-        Route::group(['prefix'=>'user' , 'middleware'=> 'admin.guard:user-api'] ,function()
-        {
-            Route::post('profile' ,function(){
-                return 'Only Authenticated User Can Reach Me!';
             });
-        });
+
+            Route::group(['prefix' =>'user', 'namespace' => 'User'], function () {
+            Route::post('login', 'AuthController@login');
+            });
+
+
+            Route::group(['prefix'=>'user' , 'middleware'=> 'auth.guard:user-api'] ,function()
+            {
+                Route::post('profile' ,function(){
+                    return  Auth::user();
+                });
+            });
 
 
     });
